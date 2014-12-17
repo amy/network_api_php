@@ -2,8 +2,8 @@
 
 /**
  * @TODO REMOVE THIS NOTE LATER
- * Was going to make EndPoint an ArrayObject, but realized that user could override checks,
- * could change the endpoint array to instance variables, but I chose not to so that I could be lazy and more
+ * Was going to make EndPoint an ArrayObject, but realized that user could override checks.
+ * A totally viable option is to change the endpoint array to instance variables, but I chose not to so that I could be lazy and more
  * uniform with the Project Query __toString
  */
 
@@ -13,10 +13,26 @@ use Behance\EndPoints\Project\Parameters\Sort;
 use Behance\EndPoints\Project\Parameters\Time;
 use Eloquent\Enumeration\AbstractEnumeration;
 
+/**
+ * Class ProjectQuery
+ * @package Behance\EndPoints\Project
+ */
 class ProjectQuery extends Project
 {
+    /**
+     * @TODO should this be a query object? What is the format of the query? Will things break if I put in a space? Can I query "BLAH" AND "OTHER THING"
+     *
+     * @var string $query
+     *    The search term you wish to query for.
+     */
     protected $query;
 
+    /**
+     * ProjectQuery constructor
+     *
+     * @param $query
+     *    The search term you wish to query for.
+     */
     public function __construct($query)
     {
         $this->query = $query;
@@ -36,6 +52,11 @@ class ProjectQuery extends Project
         );
     }
 
+    /**
+     * String representation of ProjectQuery class
+     *
+     * @return string
+     */
     public function __toString()
     {
         $query =  parent::__toString() .
@@ -63,6 +84,13 @@ class ProjectQuery extends Project
         }
 
         return  $query;
+    }
+
+    public function search($search)
+    {
+        $this->query = $search;
+
+        return $this;
     }
 
     public function sort(Sort $sort)

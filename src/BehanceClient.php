@@ -2,10 +2,10 @@
 
 namespace Behance;
 use Behance\EndPoints\EndPoint;
+use Httpful\Request;
 
 /**
- * Basic Behance Network API implementation to
- * accessing Users, Project and Works in Progress data
+ * Behance Network API implementation
  *
  * Register your application FIRST: http://be.net/dev
  *
@@ -16,30 +16,67 @@ use Behance\EndPoints\EndPoint;
  * @link     http://be.net/dev
  *
  */
-abstract class BehanceClient extends \ArrayObject
+class BehanceClient
 {
     const API_ROOT = 'https://www.behance.net/v2';
 
-    protected $request;
+    /**
+     * @var string $clientID
+     *    The api key that you received upon registering your app.
+     */
+    protected $clientID;
 
+    /**
+     * @var EndPoint $endpoint
+     *    The end point you want to make a request for.
+     */
+    protected $endpoint;
+
+    /**
+     * BehanceClient Constructor
+     *
+     * @param string $clientID
+     *    The api key that you received upon registering your app.
+     * @param EndPoint $endPoint
+     *    The end point you want to make a request for.
+     */
     public function __construct(
-        $client_ID,
+        $clientID,
         EndPoint $endPoint
     ) {
-        $this->request = array(
-            'endpoint'  => $endPoint,
-            'client ID' => $client_ID
-        );
-
-        parent::__construct($this->request);
+        $this->clientID = $clientID;
+        $this->endpoint = $endPoint;
     }
 
+    /**
+     * String representation of BehanceClient class
+     *
+     * @return string
+     */
     public function __toString()
     {
         return
             self::API_ROOT . '/' .
-            $this['endpoint']->__toString() .
-            '&client_id=' . $this['client ID'];
+            $this->endpoint->__toString() .
+            '&client_id=' . $this->clientID;
     }
 
-} // Client
+    /**
+     * Makes http request and returns json
+     *
+     * @return $response
+     */
+    public function request()
+    {
+        echo "\n YOUR QUERY \n" . $this->__toString() . "\n END QUERY \n";
+
+        $request = Request::get($this->__toString())
+            ->send();
+
+        $response = $request->raw_body;
+
+        //var_dump($request);
+        return $response;
+    }
+
+}

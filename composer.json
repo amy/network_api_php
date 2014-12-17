@@ -30,7 +30,8 @@
     "require": {
         "php": ">=5.3.3",
         "ext-curl": "*",
-        "eloquent/enumeration": "dev-master"
+        "eloquent/enumeration": "dev-master",
+        "nategood/httpful": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "4.3.*"

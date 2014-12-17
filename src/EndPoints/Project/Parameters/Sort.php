@@ -1,15 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: amy
- * Date: 12/16/14
- * Time: 11:41 PM
- */
 
 namespace Behance\EndPoints\Project\Parameters;
 
 use Eloquent\Enumeration\AbstractEnumeration;
 
+/**
+ * Class Sort
+ *
+ * @package Behance\EndPoints\Project\Parameters
+ * @author  Amy Chen <ac1084@scarletmail.rutgers.edu>
+ */
 class Sort extends AbstractEnumeration
 {
     const FEATURED_DATE = 'featured_date';
