@@ -1,6 +1,6 @@
 <?php
 
-use Behance\Client;
+use Behance\BehanceClient;
 
 class ClientTest extends PHPUnit_Framework_TestCase {
 

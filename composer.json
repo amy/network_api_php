@@ -20,11 +20,17 @@
             "name": "Mark Dunphy",
             "email": "dunphy@adobe.com",
             "homepage": "https://twitter.com/dunphtastic"
+        },
+        {
+            "name": "Amy Chen",
+            "email": "ac1084@scarletmail.rutgers.edu",
+            "homepage": "https://twitter.com/TheAmyDance"
         }
     ],
     "require": {
         "php": ">=5.3.3",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "eloquent/enumeration": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "4.3.*"
