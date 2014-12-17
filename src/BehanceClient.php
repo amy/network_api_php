@@ -64,16 +64,20 @@ class BehanceClient
     /**
      * Makes http request and returns json
      *
-     * @return $response
+     * @param bool $associativeArray
+     * @return mixed
+     * @throws \Httpful\Exception\ConnectionErrorException
      */
-    public function request()
+    public function request($associativeArray = false)
     {
         echo "\n YOUR QUERY \n" . $this->__toString() . "\n END QUERY \n";
 
         $request = Request::get($this->__toString())
             ->send();
 
-        $response = $request->raw_body;
+        $rawResponse = $request->raw_body;
+
+        $response = json_decode($rawResponse, $associativeArray);
 
         //var_dump($request);
         return $response;
