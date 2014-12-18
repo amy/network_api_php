@@ -3,8 +3,8 @@
 require("./vendor/autoload.php");
 
 use Behance\EndPoints\Project\ProjectQuery;
-use Behance\EndPoints\Project\Parameters\Sort;
-use Behance\EndPoints\Project\Parameters\Time;
+use Behance\EndPoints\Project\SubParameters\Sort;
+use Behance\EndPoints\Project\SubParameters\Time;
 use Behance\BehanceClient;
 
 /* --- build endpoint --- */
@@ -14,10 +14,10 @@ $endpoint
     -> time(Time::MONTH());
 
 $client = new BehanceClient(
-    'your api key',
+    'j5KMZxpfIDMRiNiWu0jxLgPYiO9EnGmn',
     $endpoint
 );
 
-$response = $client->request();
+$response = $client->execute();
 
 var_dump($response);

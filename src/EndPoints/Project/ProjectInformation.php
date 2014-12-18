@@ -8,7 +8,7 @@ namespace Behance\EndPoints\Project;
  * @package Behance\EndPoints\Project
  * @author  Amy Chen <ac1084@scarletmail.rutgers.edu>
  */
-class ProjectInformation extends Project
+class ProjectInformation extends ProjectID
 {
     /**
      * ProjectInformation constructor
@@ -17,9 +17,7 @@ class ProjectInformation extends Project
      */
     public function __construct($projectID)
     {
-        $this->endpoint = array(
-            'project_id' => $projectID
-        );
+        parent::__construct($projectID);
     }
 
     /**
@@ -29,8 +27,9 @@ class ProjectInformation extends Project
      */
     public function __toString()
     {
-        return  parent::__toString() .
+        return
+            parent::__toString() .
             '/' .
-            $this->endpoint['project_id'];
+            $this->projectID;
     }
 }

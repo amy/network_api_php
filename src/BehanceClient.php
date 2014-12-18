@@ -68,7 +68,7 @@ class BehanceClient
      * @return mixed
      * @throws \Httpful\Exception\ConnectionErrorException
      */
-    public function request($associativeArray = false)
+    public function execute($associativeArray = false)
     {
         echo "\n YOUR QUERY \n" . $this->__toString() . "\n END QUERY \n";
 
@@ -78,6 +78,10 @@ class BehanceClient
         $rawResponse = $request->raw_body;
 
         $response = json_decode($rawResponse, $associativeArray);
+
+        /**
+         * $response->http_code (the number of the error code)
+         */
 
         //var_dump($request);
         return $response;

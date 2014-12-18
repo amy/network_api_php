@@ -1,13 +1,13 @@
 <?php
 
-namespace Behance\EndPoints\Project\Parameters;
+namespace Behance\EndPoints\Project\SubParameters;
 
 use Eloquent\Enumeration\AbstractEnumeration;
 
 /**
  * Class Sort
  *
- * @package Behance\EndPoints\Project\Parameters
+ * @package Behance\EndPoints\Project\SubParameters
  * @author  Amy Chen <ac1084@scarletmail.rutgers.edu>
  */
 class Sort extends AbstractEnumeration

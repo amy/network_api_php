@@ -9,8 +9,8 @@
 
 namespace Behance\EndPoints\Project;
 
-use Behance\EndPoints\Project\Parameters\Sort;
-use Behance\EndPoints\Project\Parameters\Time;
+use Behance\EndPoints\Project\SubParameters\Sort;
+use Behance\EndPoints\Project\SubParameters\Time;
 use Eloquent\Enumeration\AbstractEnumeration;
 
 /**
@@ -20,24 +20,21 @@ use Eloquent\Enumeration\AbstractEnumeration;
 class ProjectQuery extends Project
 {
     /**
-     * @TODO should this be a query object? What is the format of the query? Will things break if I put in a space? Can I query "BLAH" AND "OTHER THING"
-     *
-     * @var string $query
-     *    The search term you wish to query for.
+     * @TODO should there be a query object? What is the format of the query? Will things break if I put in a space? Can I query "BLAH" AND "OTHER THING"
      */
+
     protected $query;
 
     /**
      * ProjectQuery constructor
      *
-     * @param $query
+     * @param $search
      *    The search term you wish to query for.
      */
-    public function __construct($query)
+    public function __construct($search)
     {
-        $this->query = $query;
-
-        $this->endpoint = array(
+        $this->$search = array(
+            'q' => $search,
             'sort' => null,
             'time' => null,
             'field' => null,
@@ -59,15 +56,19 @@ class ProjectQuery extends Project
      */
     public function __toString()
     {
+        /**
+         * @TODO refactor this to each specific trait when you get more detail about each thing....
+         */
+
         $query =  parent::__toString() .
             '?q=' .
-            $this->query;
+            $this->query['q'];
 
-        foreach ($this->endpoint as $parameter => $value) {
+        foreach ($this->query as $parameter => $value) {
 
             $query .= "&{$parameter}=";
 
-            if ($value !== null) {
+            if ($value !== null && $parameter !== 'q') {
 
                 if (is_object($value)) {
 
@@ -95,14 +96,14 @@ class ProjectQuery extends Project
 
     public function sort(Sort $sort)
     {
-        $this->endpoint['sort'] = $sort;
+        $this->query['sort'] = $sort;
 
         return $this;
     }
 
     public function time(Time $time)
     {
-        $this->endpoint['time'] = $time;
+        $this->query['time'] = $time;
 
         return $this;
     }
